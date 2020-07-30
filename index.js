@@ -7,7 +7,8 @@ const zipFolder = require('folder-zip-sync')
 var shell = require('shelljs');
 
 exports.handler = async (event) => {
-    var name = 'nxworkspace3'; //event.queryStringParameters.name
+    var name = 'nxworkspace1'; //event.queryStringParameters.name
+    var commandInstallAngular = 'npm install -g @angular/cli';
     var command = 'ng new hello-world-project --interactive=false --routing=true --skipGit=true --style=css --skipInstall=true --directory=.';
     var dir = '/tmp/' + name;
     var zipFile = dir + '.zip';
@@ -26,8 +27,15 @@ exports.handler = async (event) => {
     //run commands
     shell.cd(dir);
 
+    console.log("installing angular...");
+    if (shell.exec(commandInstallAngular).code !== 0) {
+        shell.echo('failed to install angular');
+        shell.exit(1);
+    }
+
+    console.log("creating project with the following command: "+command);
     if (shell.exec(command).code !== 0) {
-        shell.echo('failed to create projet');
+        shell.echo('failed to create project');
         shell.exit(1);
     }
 
@@ -52,6 +60,12 @@ exports.handler = async (event) => {
             console.log('Successfully uploaded data');
         }
     });
+
+    //delete dir
+    if (fs.existsSync(dir)) {
+        fs.rmdirSync(dir, { recursive: true });
+        console.log(dir + " has been deleted!");
+    }
 
     const response = {
         statusCode: 200,
