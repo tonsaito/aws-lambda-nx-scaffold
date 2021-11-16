@@ -21,7 +21,7 @@
   "homepage": "https://github.com/tonsaito/aws-lambda-nx-scaffold#readme",
   "dependencies": {
     "archiver": "^5.0.0",
-    "aws-sdk": "^2.723.0",
+    "aws-sdk": "^2.814.0",
     "folder-zip-sync": "^1.0.5",
     "npx": "^10.2.2",
     "shelljs": "^0.8.4"
