@@ -24,6 +24,6 @@
     "aws-sdk": "^2.723.0",
     "folder-zip-sync": "^1.0.5",
     "npx": "^10.2.2",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.5"
   }
 }
